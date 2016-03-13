@@ -1,4 +1,4 @@
-package net.naturesnap.apiclient.http;
+package net.naturesnap.apiclient.http.requests;
 
 import net.naturesnap.apiclient.http.enums.Format;
 import net.naturesnap.apiclient.http.enums.Type;
