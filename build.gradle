@@ -41,7 +41,7 @@ publishing {
         impl(MavenPublication) {
             groupId 'net.naturesnap.api'
             artifactId 'NatureSnapAPI'
-            version '1.3'
+            version '1.0'
     
             from components.java
         }
@@ -49,7 +49,7 @@ publishing {
     repositories {
         maven {
             // change to point to your repo, e.g. http://my.org/repo
-            url "$buildDir/repos"
+            url "$buildDir/repo"
         }
     }
 }
