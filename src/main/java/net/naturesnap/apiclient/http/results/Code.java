@@ -1,4 +1,4 @@
-package net.naturesnap.apiclient.http;
+package net.naturesnap.apiclient.http.results;
 
 public class Code extends Result {
 	private String response;

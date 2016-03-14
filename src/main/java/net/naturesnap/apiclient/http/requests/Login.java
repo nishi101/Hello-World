@@ -2,6 +2,7 @@ package net.naturesnap.apiclient.http.requests;
 
 import net.naturesnap.apiclient.http.enums.Format;
 import net.naturesnap.apiclient.http.enums.Type;
+import net.naturesnap.apiclient.http.results.Code;
 
 public class Login extends Request {
 	public Login(){
@@ -9,6 +10,6 @@ public class Login extends Request {
 		this.setFormat(Format.CODE);
 		this.setParams("username", "password");
 		this.setType(Type.POST);
-		this.setResult(null);
+		this.setResult(Code.class);
 	}
 }

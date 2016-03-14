@@ -9,6 +9,6 @@ public class ImageUpload extends Request {
 		this.setFormat(Format.CODE);
 		this.setParams("filename", "description");
 		this.setType(Type.FILE);
-		this.setResult(null);
+		this.setResult(ImageUpload.class);
 	}
 }

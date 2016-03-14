@@ -2,6 +2,7 @@ package net.naturesnap.apiclient.http.requests;
 
 import net.naturesnap.apiclient.http.enums.Format;
 import net.naturesnap.apiclient.http.enums.Type;
+import net.naturesnap.apiclient.http.results.Code;
 
 public class ImageUpdate extends Request {
 	public ImageUpdate(){
@@ -9,6 +10,6 @@ public class ImageUpdate extends Request {
 		this.setFormat(Format.CODE);
 		this.setParams("photo_id", "filename", "username", "user_id");
 		this.setType(Type.POST);
-		this.setResult(null);
+		this.setResult(Code.class);
 	}
 }
