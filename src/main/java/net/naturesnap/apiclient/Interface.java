@@ -1,6 +1,8 @@
 package net.naturesnap.apiclient;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -11,7 +13,10 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClients;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.naturesnap.apiclient.http.requests.Request;
+import net.naturesnap.apiclient.http.results.Code;
 import net.naturesnap.apiclient.http.results.Result;
 import sun.misc.IOUtils;
 
@@ -30,7 +35,7 @@ public class Interface {
 		HttpUriRequest get, post;
 		switch(request.type){
 			case GET:
-				reqBuilder = RequestBuilder.get().setUri("http://naturesnap.net/"+request.getEndpoint());
+				reqBuilder = RequestBuilder.get("http://naturesnap.net/"+request.getEndpoint());
 				for(int i=0;i<request.getParams().length;i++){
 					reqBuilder.addParameter(request.getParams()[i], paramValues[i]);
 				}
@@ -75,10 +80,21 @@ public class Interface {
 	public static Result responseData(Request request, String content){
 		switch(request.format){
 			case CODE:
-				System.out.println(content);
+				return new Code(content);
+			case JSON:
+				ObjectMapper mapper = new ObjectMapper();
+				try {
+					return (Result) mapper.readValue(content, request.getResult());
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				}
 			break;
 			default:
-				// Error
+				System.out.println("ERROR");
 			break;
 		}
 		return null;

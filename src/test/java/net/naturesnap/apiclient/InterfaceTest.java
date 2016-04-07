@@ -1,9 +1,15 @@
 package net.naturesnap.apiclient;
 
 import static org.junit.Assert.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.Test;
 import net.naturesnap.apiclient.http.requests.Login;
+import net.naturesnap.apiclient.http.requests.Photo;
 import net.naturesnap.apiclient.http.requests.Register;
+import net.naturesnap.apiclient.http.results.PhotoData;
 
 public class InterfaceTest {
 	@Test
@@ -41,5 +47,11 @@ public class InterfaceTest {
 	@Test
 	public void failedRegisterExists() {
 		assertEquals(Interface.apiRequest(new Register(), new String[]{"John", "Doe", "johndoe@gmail.com", "john", "doe"}),"exists");
+	}
+	@Test
+	public void testPhoto() {
+		System.out.println("test");
+		PhotoData pd = (PhotoData) Interface.request(new Photo(), new String[]{"1"});
+		System.out.println(pd.getData().size());
 	}
 }
