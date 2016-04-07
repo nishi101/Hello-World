@@ -27,7 +27,7 @@ public class Interface {
 		String content = apiRequest(request, paramValues);
 		return responseData(request, content);
 	}
-	public static String apiRequest(Request request, String[] paramValues){
+	public static String apiRequest(Request request, String... paramValues){
 		if(httpClient==null){
 			httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 		}

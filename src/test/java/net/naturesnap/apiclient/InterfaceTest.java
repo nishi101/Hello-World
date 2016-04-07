@@ -51,7 +51,13 @@ public class InterfaceTest {
 	@Test
 	public void testPhoto() {
 		System.out.println("test");
-		PhotoData pd = (PhotoData) Interface.request(new Photo(), new String[]{"1"});
+		PhotoData pd = (PhotoData) Interface.request(new Photo(), "7");
+		//PhotoData pd = (PhotoData) Interface.request(new Photo(), "4");
 		System.out.println(pd.getData().size());
+		if(pd.getData().size()>0){
+			System.out.println(pd.getData().get(0).getImagePath());	
+		}
+		//GroupData gd = (GroupData) Interface.request(new GroupPhotos(), "1");
+		
 	}
 }
