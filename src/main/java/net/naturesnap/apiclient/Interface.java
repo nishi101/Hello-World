@@ -70,6 +70,9 @@ public class Interface {
 					e.printStackTrace();
 				}
 			break;
+			case FILE:
+				
+			break;
 			default:
 				// Error
 			break;
