@@ -5,20 +5,27 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import net.naturesnap.apiclient.http.results.PhotoItem;
+import net.naturesnap.apiclient.http.results.UserResponse;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import net.naturesnap.apiclient.http.requests.Login;
 import net.naturesnap.apiclient.http.requests.Photo;
 import net.naturesnap.apiclient.http.requests.Register;
 import net.naturesnap.apiclient.http.results.PhotoData;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InterfaceTest {
 	@Test
-	public void successfulLogin() {
-		assertEquals(Interface.apiRequest(new Login(), new String[]{"jane", "doe"}),"success");
+	public void ysuccessfulLogin() {
+		UserResponse ur = (UserResponse) Interface.request(new Login(), new String[]{"jane", "doe"});
+		assertEquals(ur.getSuccess(),true);
 	}
 	@Test
 	public void failedLogin() {
-		assertEquals(Interface.apiRequest(new Login(), new String[]{"jane", "do"}),"error");
+		UserResponse ur = (UserResponse) Interface.request(new Login(), new String[]{"jane", "do"});
+		assertEquals(ur.getSuccess(),false);
 	}
 	@Test
 	public void failedRegisterLastName() {
@@ -49,15 +56,14 @@ public class InterfaceTest {
 		assertEquals(Interface.apiRequest(new Register(), new String[]{"John", "Doe", "johndoe@gmail.com", "john", "doe"}),"exists");
 	}
 	@Test
-	public void testPhoto() {
-		System.out.println("test");
-		PhotoData pd = (PhotoData) Interface.request(new Photo(), "7");
-		//PhotoData pd = (PhotoData) Interface.request(new Photo(), "4");
-		System.out.println(pd.getData().size());
-		if(pd.getData().size()>0){
-			System.out.println(pd.getData().get(0).getImagePath());	
-		}
-		//GroupData gd = (GroupData) Interface.request(new GroupPhotos(), "1");
+	public void ztestPhotoFail() {
+		PhotoItem pd = (PhotoItem) Interface.request(new Photo(), "7");
+		assertEquals(pd.isSuccess(), false);
 		
+	}
+	@Test
+	public void ztestPhotoExists() {
+		PhotoItem pd = (PhotoItem) Interface.request(new Photo(), "9");
+		assertEquals(pd.isSuccess(), true);
 	}
 }

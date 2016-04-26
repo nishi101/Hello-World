@@ -3,6 +3,7 @@ package net.naturesnap.apiclient.http.requests;
 import net.naturesnap.apiclient.http.enums.Format;
 import net.naturesnap.apiclient.http.enums.Type;
 import net.naturesnap.apiclient.http.results.PhotoData;
+import net.naturesnap.apiclient.http.results.PhotoItem;
 
 public class Photo extends Request {
 	public Photo(){
@@ -10,6 +11,6 @@ public class Photo extends Request {
 		this.setFormat(Format.JSON);
 		this.setParams("photo_id");
 		this.setType(Type.GET);
-		this.setResult(PhotoData.class);
+		this.setResult(PhotoItem.class);
 	}
 }
