@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.5
-version = '1.1'
+version = '1.2'
 
 repositories {
     mavenCentral()
@@ -45,7 +45,7 @@ publishing {
         impl(MavenPublication) {
             groupId 'net.naturesnap.api'
             artifactId 'NatureSnapAPI'
-            version '1.1'
+            version '1.2'
     
             from components.java
         }
