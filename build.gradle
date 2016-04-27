@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.5
-version = '1.2'
+version = '1.2.1'
 
 repositories {
     mavenCentral()
@@ -23,6 +23,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1-1'
     compile 'com.fasterxml:jackson-module-json-org:0.9.1'
     compile 'com.fasterxml:jackson-xml-databind:0.6.2'
+    compile 'commons-io:commons-io:2.5'
 }
 
 task apiJar(type: Jar) {
@@ -44,7 +45,7 @@ publishing {
         impl(MavenPublication) {
             groupId 'net.naturesnap.api'
             artifactId 'NatureSnapAPI'
-            version '1.2'
+            version '1.2.1'
     
             from components.java
         }

@@ -1,7 +1,6 @@
 package net.naturesnap.apiclient;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.client.*;
@@ -15,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.naturesnap.apiclient.http.requests.Request;
 import net.naturesnap.apiclient.http.results.Code;
 import net.naturesnap.apiclient.http.results.Result;
-import sun.misc.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 public class Interface {
 	public static BasicCookieStore cookieStore = new BasicCookieStore();
@@ -40,7 +39,7 @@ public class Interface {
 				try {
 					CloseableHttpResponse response = (CloseableHttpResponse) httpClient.execute(get);
 					HttpEntity entity = response.getEntity();
-					String content = new String(IOUtils.readFully(entity.getContent(), (int)entity.getContentLength(), false));
+					String content = IOUtils.toString(entity.getContent(), "UTF-8");
 					response.close();
 					return content;
 				} catch (ClientProtocolException e) {
@@ -58,7 +57,7 @@ public class Interface {
 				try {
 					CloseableHttpResponse response = (CloseableHttpResponse) httpClient.execute(post);
 					HttpEntity entity = response.getEntity();
-					String content = new String(IOUtils.readFully(entity.getContent(), (int)entity.getContentLength(), false));
+					String content = new String(IOUtils.toString(entity.getContent(), "UTF-8"));
 					response.close();
 					return content;
 				} catch (ClientProtocolException e) {
