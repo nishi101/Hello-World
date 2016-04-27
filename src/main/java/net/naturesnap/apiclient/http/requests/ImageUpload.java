@@ -8,7 +8,7 @@ public class ImageUpload extends Request {
 	public ImageUpload(){
 		this.setEndpoint("imageUploader.php");
 		this.setFormat(Format.CODE);
-		this.setParams("","description");
+		this.setParams("filename","latitude","longitude");
 		this.setType(Type.FILE);
 		this.setResult(ImageUpload.class);
 	}

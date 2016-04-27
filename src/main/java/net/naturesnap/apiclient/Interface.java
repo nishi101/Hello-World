@@ -1,12 +1,19 @@
 package net.naturesnap.apiclient;
 
+import java.io.File;
 import java.io.IOException;
 
 import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.*;
 import cz.msebera.android.httpclient.client.methods.CloseableHttpResponse;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.client.methods.HttpUriRequest;
 import cz.msebera.android.httpclient.client.methods.RequestBuilder;
+import cz.msebera.android.httpclient.entity.ContentType;
+import cz.msebera.android.httpclient.entity.mime.HttpMultipartMode;
+import cz.msebera.android.httpclient.entity.mime.MultipartEntityBuilder;
+import cz.msebera.android.httpclient.entity.mime.content.FileBody;
 import cz.msebera.android.httpclient.impl.client.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -57,7 +64,7 @@ public class Interface {
 				try {
 					CloseableHttpResponse response = (CloseableHttpResponse) httpClient.execute(post);
 					HttpEntity entity = response.getEntity();
-					String content = new String(IOUtils.toString(entity.getContent(), "UTF-8"));
+					String content = IOUtils.toString(entity.getContent(), "UTF-8");
 					response.close();
 					return content;
 				} catch (ClientProtocolException e) {
@@ -67,7 +74,25 @@ public class Interface {
 				}
 			break;
 			case FILE:
-				
+				HttpPost postFile = new HttpPost("http://naturesnap.net/"+request.getEndpoint());
+				File file = new File(request.getParams()[0]);
+				FileBody fileBody = new FileBody(file);
+				MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+				builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+				builder.addPart("filename", fileBody);
+				builder.addTextBody("uploadForm","Upload");
+				builder.addTextBody("latitude",request.getParams()[1]);
+				builder.addTextBody("longitude",request.getParams()[2]);
+				builder.addTextBody("groupName","");
+				builder.addTextBody("description","");
+				HttpEntity entity = builder.build();
+				postFile.setEntity(entity);
+				try {
+					HttpResponse response = httpClient.execute(postFile);
+					return IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+				}catch(Exception e){
+
+				}
 			break;
 			default:
 				// Error
