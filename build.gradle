@@ -19,7 +19,7 @@ task myJavadocs(type: Javadoc) {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.14'
     testCompile 'junit:junit:4.12'
-    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    compile group: 'cz.msebera.android' , name: 'httpclient', version: '4.4.1.1'
     compile 'com.fasterxml.jackson.core:jackson-core:2.7.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1-1'
     compile 'com.fasterxml:jackson-module-json-org:0.9.1'
