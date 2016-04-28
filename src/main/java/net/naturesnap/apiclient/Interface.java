@@ -24,7 +24,7 @@ import net.naturesnap.apiclient.http.results.Result;
 import org.apache.commons.io.IOUtils;
 
 public class Interface {
-	public static BasicCookieStore cookieStore = new BasicCookieStore();
+	public static final BasicCookieStore cookieStore = new BasicCookieStore();
 	public static HttpClient httpClient=null;
 	public static Result request(Request request, String... paramValues){
 		String content = apiRequest(request, paramValues);
